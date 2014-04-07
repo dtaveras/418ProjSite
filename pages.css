@@ -4,7 +4,7 @@ h1 {
     text-align: center ;
 	color:#000000;
     padding-bottom: 5px;
-    border-bottom: 2px solid #ff0000;
+    border-bottom: 2px solid #17469C;
     //border: 1px solid #ff0000;
     font-family: "Courier New", Courier, monospace;
 }
@@ -16,10 +16,6 @@ h1 {
     padding: 0;
     padding-top: 0;
     padding-bottom: 0;
-    //padding-right: 8px;
-    //padding-left: 8px;
-    //box-shadow: 0px 1px 0px #888888;
-    //border:1px solid #000000;
 }
 #homep img{
     //border:1px solid #000000;
@@ -41,5 +37,5 @@ h1 {
 
 .sections {
     width: 20%;
-    border-bottom: 2px dashed #000000;
+    border-bottom: 2px dashed #505050;
 }
