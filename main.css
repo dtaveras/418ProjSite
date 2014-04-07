@@ -1,40 +1,50 @@
 h1 {
     text-align: center ;
 	color:#000000;
-    border: 1px solid #ff0000;
-	outline-color: #000000;
+    //border: 1px solid #ff0000;
     //height: 50px;
     padding: 0;
 	margin-top:0px;
-    margin-bottom:0px;
+    margin-bottom:2px;
     margin-right:0px;
     margin-left:0px;
 	padding: 0px;
     //background-color: #001058;
     font-family: "Courier New", Courier, monospace;
 }
-a:link {color:#FF0000;}      /* unvisited link */
-a:visited {color:#00FF00;}  /* visited link */
-a:hover {color:#FF00FF;}  /* mouse over link */
-a:active {color:#0000FF;}  /* selected link */
+
+a:link {color:#F0F0F0; font-weight: normal; font-size: 14px;}      /* unvisited link */
+a:visited {color:#505050;}  /* visited link */
+//a:hover {color:#FF00FF;}  /* mouse over link */
+//a:active {color:#0000FF;}  /* selected link */
 a:link {text-decoration:none;}
 a:visited {text-decoration:none;}
 a:hover {text-decoration:underline;}
 a:active {text-decoration:underline;}
 
 #nameMenu {
+    border-bottom: 2px solid #17469C;
     font-size: 12px;
 }
 
 h3 {
     text-align: center ;
-    border: 1px solid #00ff00;
-    outline-color: #000000;
+    //border: 1px solid #00ff00;
     font-family: "Courier New", Courier, monospace;
     margin-top:0px;
     margin-bottom:0px;
     margin-right:0px;
     margin-left:0px;
+}
+
+
+
+#mheadings {
+    width: 20%;
+    text-align: left;
+    margin-left: 25px;
+    border-bottom: 2px dashed #17469C;
+    //border: 2px solid #FF00FF;
 }
 
 h4 {
@@ -52,7 +62,6 @@ h4 {
 body {
 	margin: 0;
 	padding: 0;
-	border: 1px solid #00ff00;
 	background: #ffffff;
     //background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #0017AB 80%);
     //background: #4F86B8;
@@ -61,9 +70,10 @@ body {
 .container {
 	  width:900px;
       margin:1px auto 0 auto;
-      padding:1px;
+      padding-bottom:20px;
       //border:1px solid #000000;
-      background-color:#ffffff;
+      font-family: "Courier New", Courier, monospace;
+      //background-color:#ffffff;
 }
 
 footer {
@@ -74,16 +84,17 @@ footer {
 
 /* Navigation Menu*/
 #navMenu {
+    //width: 90%;
     text-align: center;
     margin: 0;
     padding: 0;
     height: 40px;
-    margin-top: 10px;
+    //margin-top: 10px;
     margin-bottom: 10px;
     padding-top:0px;
-
+    border-bottom: 1px solid #505050;
     //background-color: #001058;
-    border: 1px solid #0000ff;
+    //border: 1px solid #0000ff;
     //box-shadow: 0px 1px 2px #888888;
     z-index: 10;
 }
@@ -105,7 +116,7 @@ footer {
 
     //background-color: #001040;
     //background-color: #000000;
-    border-right: 2px solid #ffffff;
+    border-right: 9px solid #ffffff;
     //border-left: 1.0cm solid #ffffff;
 }
 
@@ -133,7 +144,7 @@ footer {
     opacity: 1.0;
     background-repeat: no-repeat;
     background-position: left center;
-    border: 1px solid rgb(240,200,10);
+    //border: 1px solid rgb(240,200,10);
 }
 
 #navMenu ul ul {
@@ -156,7 +167,7 @@ footer {
 
 #navMenu a:hover {
     color: #000000;
-    background-color: #00ff00;
+    background-color: #F0F0F0;
 }
 
 #navMenu ul li:hover ul li a:hover {
@@ -243,8 +254,8 @@ text-align: center;
 //border-collapse: collapse;
 //border: 1px solid #000;
 margin-top: 10px;
-margin-bottom: 10px;
-box-shadow: -0px 1px 1px 1px #888888;
+margin-bottom: 20px;
+//box-shadow: -0px 1px 1px 1px #888888;
 //margin: 20px;
 }
 
@@ -261,9 +272,9 @@ box-shadow: -0px 1px 1px 1px #888888;
 }
 
 #newspaper-b th{
-   color: #000;
+   color: #fff;
    padding: 10px;
-   background: #e8edff;
+   background: #17469C;
 
 }
 
@@ -277,9 +288,13 @@ tfoot {
 }
 
 #news {
+ width: 94%;
  margin-top: 5px;
+ margin-left: 22px;
  padding: 4px;
- border: 1px dashed #000000;
+ //box-shadow: -0px 1px 1px 1px #888888;
+ //border: 1px dashed #000000;
  outline-color: blue;
 }
+
 
