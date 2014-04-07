@@ -124,11 +124,11 @@ footer {
     width: auto;
     //display: block;
     text-align: center;
-    font-family: sans-serif;
+    font-family: "Courier New", Courier, monospace;
     font-weight: bold;
     text-decoration: none;
-    padding: 2px;
-    font-size:12px;
+    padding: 5px;
+    font-size:14px;
     color: #000000;
     opacity: 1.0;
     background-repeat: no-repeat;
@@ -236,32 +236,44 @@ footer {
 }
 /*****************************************************/
 #newspaper-b {
-font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-font-size: 12px;
-width: 90%;
-text-align: left;
-border-collapse: collapse;
-border: 1px solid #69c;
+font-family: "Courier New", Courier, monospace;
+font-size: 13px;
+width: 95%;
+text-align: center;
+//border-collapse: collapse;
+//border: 1px solid #000;
 margin-top: 10px;
 margin-bottom: 10px;
+box-shadow: -0px 1px 1px 1px #888888;
 //margin: 20px;
-}
-#newspaper-b tbody {
-//background: #e8edff;
-}
-#newspaper-b td {
-color: #669;
-border-top: 1px dashed #fff;
-//padding: 10px;
 }
 
 #newspaper-b thead{
+    border: 1px solid #000;
+}
+
+#newspaper-b tbody {
+//background: #e8edff;
+}
+
+#newspaper-b td {
+ border-top: 1px dashed #000;
+}
+
+#newspaper-b th{
+   color: #000;
+   padding: 10px;
    background: #e8edff;
+
 }
 
 #newspaper-b tr:hover{
-background: #69c;
-color: #fff;
+    background: #f5f5f5;
+    color: #000;
+}
+
+tfoot {
+    font-weight: bold;
 }
 
 #news {
@@ -270,3 +282,4 @@ color: #fff;
  border: 1px dashed #000000;
  outline-color: blue;
 }
+
