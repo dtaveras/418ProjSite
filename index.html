@@ -7,7 +7,9 @@
     <meta charset="utf-8"/>
     <!-- Styles the index page-->
     <link rel="stylesheet" type="text/css" href="main.css" />
-
+    <link rel="icon" 
+      type="image/png" 
+      href="icon.png">
 
    </head>
 
@@ -34,9 +36,8 @@
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var months = ['January','February','March','April','May','June','July',
     'August','September','October','November','December'];       
-    var tomorrow = new Date();
-    tomorrow.setTime(tomorrow.getTime() + (1000*3600*24));       
-    document.getElementById("spanDiv").innerHTML =  days[tomorrow.getDay()-1] + " "+ months[tomorrow.getMonth()] + " " + tomorrow.getDate()+ ", " + tomorrow.getFullYear();
+    var today = new Date();
+    document.getElementById("spanDiv").innerHTML =  days[today.getDay()-1] + " "+ months[today.getMonth()] + " " + today.getDate()+ ", " + today.getFullYear();
   </script>
 
   <div id="navMenu">
