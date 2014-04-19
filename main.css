@@ -13,7 +13,7 @@ h1 {
     font-family: "Courier New", Courier, monospace;
 }
 
-a:link {color:#F0F0F0; font-weight: normal; font-size: 14px;}      /* unvisited link */
+a:link {color:#A0A0A0; font-weight: normal; font-size: 14px;}      /* unvisited link */
 a:visited {color:#505050;}  /* visited link */
 //a:hover {color:#FF00FF;}  /* mouse over link */
 a:active {color:#FF0000;}  /* selected link */
