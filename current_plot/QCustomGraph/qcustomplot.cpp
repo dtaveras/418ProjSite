@@ -9835,7 +9835,7 @@ int QCustomPlot::graphCount() const
   
   \see setInteractions, selectedPlottables, QCPAbstractPlottable::setSelectable, QCPAbstractPlottable::setSelected
 */
-QList<QCPGraph*> QCustomPlot::selectedGraphs() const
+QList<QCPGraph*> QCustomPlot::selectedGraphs()
 {
   QList<QCPGraph*> result;
   foreach (QCPGraph *graph, mGraphs)
@@ -10766,6 +10766,11 @@ void QCustomPlot::mouseDoubleClickEvent(QMouseEvent *event)
   
   \see mouseMoveEvent, mouseReleaseEvent
 */
+
+void QCustomPlot::mousePressWidgetEvent(QMouseEvent *event){
+  qDebug() << "mouspress widget event";
+}
+
 void QCustomPlot::mousePressEvent(QMouseEvent *event)
 {
   emit mousePress(event);
@@ -10777,6 +10782,7 @@ void QCustomPlot::mousePressEvent(QMouseEvent *event)
     mMouseEventElement->mousePressEvent(event);
   
   QWidget::mousePressEvent(event);
+  this->mousePressWidgetEvent(event);
 }
 
 /*! \internal
@@ -10790,6 +10796,7 @@ void QCustomPlot::mousePressEvent(QMouseEvent *event)
 */
 void QCustomPlot::mouseMoveEvent(QMouseEvent *event)
 {
+  this->mouseMoveWidgetEvent(event);
   emit mouseMove(event);
 
   // call event of affected layout element:
@@ -10797,6 +10804,9 @@ void QCustomPlot::mouseMoveEvent(QMouseEvent *event)
     mMouseEventElement->mouseMoveEvent(event);
   
   QWidget::mouseMoveEvent(event);
+}
+
+void QCustomPlot::mouseMoveWidgetEvent(QMouseEvent *event){
 }
 
 /*! \internal
@@ -10883,6 +10893,11 @@ void QCustomPlot::mouseReleaseEvent(QMouseEvent *event)
     replot();
   
   QWidget::mouseReleaseEvent(event);
+  this->mouseReleaseWidgetEvent(event);
+}
+
+void QCustomPlot::mouseReleaseWidgetEvent(QMouseEvent *event){
+  
 }
 
 /*! \internal
@@ -12518,6 +12533,7 @@ void QCPAxisRect::mousePressEvent(QMouseEvent *event)
 */
 void QCPAxisRect::mouseMoveEvent(QMouseEvent *event)
 {
+  
   // Mouse range dragging interaction:
   if (mDragging && mParentPlot->interactions().testFlag(QCP::iRangeDrag))
   {
@@ -15222,7 +15238,7 @@ void QCPGraph::getScatterPlotData(QVector<QCPData> *scatterData) const
   points that are visible for drawing scatter points, if necessary. If drawing scatter points is
   disabled (i.e. the scatter style's shape is \ref QCPScatterStyle::ssNone), pass 0 as \a
   scatterData, and the function will skip filling the vector.
-  
+,  
   \see drawLinePlot
 */
 void QCPGraph::getLinePlotData(QVector<QPointF> *linePixelData, QVector<QCPData> *scatterData) const
@@ -15657,7 +15673,6 @@ void QCPGraph::getPreparedData(QVector<QCPData> *lineData, QVector<QCPData> *sca
     maxCount = 2*keyPixelSpan+2;
   }
   int dataCount = countDataInBounds(lower, upper, maxCount);
-  
   if (mAdaptiveSampling && dataCount >= maxCount) // use adaptive sampling only if there are at least two points per pixel on average
   {
     if (lineData)
@@ -15948,10 +15963,11 @@ void QCPGraph::getVisibleDataBounds(QCPDataMap::const_iterator &lower, QCPDataMa
   // get visible data range as QMap iterators
   QCPDataMap::const_iterator lbound = mData->lowerBound(mKeyAxis.data()->range().lower);
   QCPDataMap::const_iterator ubound = mData->upperBound(mKeyAxis.data()->range().upper);
+
   bool lowoutlier = lbound != mData->constBegin(); // indicates whether there exist points below axis range
   bool highoutlier = ubound != mData->constEnd(); // indicates whether there exist points above axis range
-  
-  lower = (lowoutlier ? lbound-1 : lbound); // data point range that will be actually drawn
+
+  lower = (lowoutlier ? lbound-1: lbound); // data point range that will be actually drawn
   upper = (highoutlier ? ubound : ubound-1); // data point range that will be actually drawn
 }
 

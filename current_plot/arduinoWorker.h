@@ -1,4 +1,5 @@
 #include <QObject>
+#include <QMouseEvent>
 
 class ArduinoWorker : public QObject
 {
@@ -15,4 +16,5 @@ private:
 signals:
   void addNewData(double x, double y);
   void addNewDataY(double y);
+public slots:
 };

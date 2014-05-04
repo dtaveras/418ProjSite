@@ -10,11 +10,14 @@
 #include <termios.h>
 #include <string>
 #include <unistd.h>
+#include <math.h>
 #include <fcntl.h>
-
+#include <QDateTime>
 #include "arduinoWorker.h"
 
 #define MAX_NUM_SIZE 10
+#define EPSILON_CUT_OFF 0.001
+#define READ_AMOUNT 256
 
 using namespace std;
 
@@ -67,14 +70,15 @@ void ArduinoWorker::startListening(){
   int stops = 1;
 
   this->inputfd = openPort( port, baud, bits, parity, stops, ( O_RDONLY | O_NOCTTY | O_NDELAY ));
-
+  int closed = 0;
   if(inputfd < 0){
     qDebug() << "Unable to Open port Sorry!";
+    closed = 1;
   }
 
   fd_set readfds, basefds, errfds ;
   int selectCount, bytesRead;
-  char buffer[1024] ;
+  char buffer[READ_AMOUNT] ;
 
   char numBuffer[MAX_NUM_SIZE];
   unsigned int size;
@@ -92,10 +96,11 @@ void ArduinoWorker::startListening(){
     }
 
     if ( selectCount > 0 && FD_ISSET( inputfd, &readfds ) ) {
-      bytesRead = read( inputfd, buffer, 1024) ;
+      bytesRead = read( inputfd, buffer, READ_AMOUNT) ;
       //printf("read:%d\n",bytesRead);
       //printf("%s\n",buffer);
-
+      
+      static double endTime = 0;
       char* char_itr = buffer;
       numBuffer[0] = '\0';
       sscanf(char_itr, "%10[^,]",numBuffer);
@@ -103,13 +108,18 @@ void ArduinoWorker::startListening(){
       if(size > 0) {
 	string str(numBuffer);
 	if(str.find_first_not_of("0123456789") != std::string::npos){
-	  double currentRead = atof(numBuffer);
+	  double currentRead = atof(numBuffer)*-1.0;
 	  //qDebug() << currentRead;
-	  emit addNewDataY(-currentRead);//invert due to setup
+	  if(currentRead > EPSILON_CUT_OFF){
+	    double cur_time = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+	    //qDebug() << cur_time - endTime;
+	    endTime = cur_time;
+	    emit addNewDataY(currentRead);//invert due to setup
+	  }
 	}
       }
 
-      while(size > 0){
+      /*while(size > 0){
 
 	numBuffer[0] = '\0';
 	char_itr += size+1;
@@ -117,11 +127,12 @@ void ArduinoWorker::startListening(){
 	size = strlen(numBuffer);
 	string str(numBuffer);
        	if(str.find_first_not_of("0123456789") != std::string::npos){
-	  double currentRead = atof(numBuffer);
-	  //qDebug() << currentRead;
-	  emit addNewDataY(-currentRead);//invert due to setup
+	  double currentRead = atof(numBuffer)*-1.0;
+	  qDebug() << currentRead;
+	  if(currentRead > EPSILON_CUT_OFF)
+	    emit addNewDataY(currentRead);//invert due to setup
 	}
-      }
+	}*/
 
     }
 

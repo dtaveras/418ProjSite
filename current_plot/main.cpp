@@ -6,13 +6,15 @@
 #include <QThread>
 #include <QObject>
 #include <QDebug>
+#include <QFont>
+#include <QMetaType>
 
 #include "QCustomGraph/qcustomplotwidget.h"
 #include "arduinoWorker.h"
 
 
-#define WIND_WIDTH 600
-#define WIND_HEIGHT 400
+#define WIND_WIDTH 800
+#define WIND_HEIGHT 600
 
 int main(int argc, char** argv){
   QApplication app(argc, argv);
@@ -25,21 +27,44 @@ int main(int argc, char** argv){
   //Initialize widgets and layouts
   QCustomPlotWidget* customPlot = new QCustomPlotWidget;
   customPlot->addGraph();
+  customPlot->addGraph();
+
   QPen pen;
-  pen.setColor(QColor(255,170,100));
+  pen.setColor(QColor(2,97,37));
   pen.setWidth(2);
   //pen.setStyle(Qt::DotLine);
   customPlot->graph(0)->setPen(pen);
-  customPlot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+  customPlot->graph(0)->setBrush(QBrush(QColor(0, 255, 0, 20)));
+
+  pen.setColor(QColor(0,0,100));
+  pen.setWidth(2);
+  //pen.setStyle(Qt::DotLine);
+  customPlot->graph(1)->setPen(pen);
+  customPlot->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
 
   customPlot->yAxis->setLabel(QString::fromUtf8("Current (mA)"));
   customPlot->xAxis->setLabel(QString::fromUtf8("Time (ms)"));
+
+  customPlot->xAxis->setLabelFont(QFont("Courier", 20, QFont::Bold));
+  customPlot->yAxis->setLabelFont(QFont("Courier", 20, QFont::Bold));
+  
   customPlot->yAxis->setNumberFormat("f");
   customPlot->yAxis->setNumberPrecision(3);
-  customPlot->xAxis->setTickLabels(false);
+  //customPlot->xAxis->setTickLabels(false);
   customPlot->axisRect()->setupFullAxesBox();
+
+  customPlot->yAxis->setAutoTickStep(false);
+  customPlot->yAxis->setAutoSubTicks(false);
+  customPlot->yAxis->setTickStep(100);
+  customPlot->yAxis->setSubTickCount(5);
+  customPlot->yAxis->setRange(0,1000);
   
-  
+  customPlot->setInteractions(QCP::iRangeDrag | QCP::iSelectPlottables);
+
+  //customPlot->setInteractions(QCP::iSelectPlottables);
+  //customPlot->graph(0)->setAdaptiveSampling(true);
+  //customPlot->setNoAntialiasingOnDrag(true);
+
   QVBoxLayout* mainLayout = new QVBoxLayout;
   mainLayout->addWidget(customPlot);
   window->setLayout(mainLayout);
@@ -53,9 +78,11 @@ int main(int argc, char** argv){
   QObject::connect(listenerThread, SIGNAL(started()), worker, SLOT(startListening()));
   QObject::connect(worker, SIGNAL(addNewDataY(double)), customPlot, 
 		   SLOT(addGraphDataY(double)));
-
+  QObject::connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), worker, 
+		   SLOT(receivedMouse(QMouseEvent*)));
   listenerThread->start();
-  window->show();
+  //window->show();
+  window->showMaximized();
 
   return app.exec();
 }

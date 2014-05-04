@@ -1747,7 +1747,7 @@ public:
   bool removeGraph(int index);
   int clearGraphs();
   int graphCount() const;
-  QList<QCPGraph*> selectedGraphs() const;
+  QList<QCPGraph*> selectedGraphs();
 
   // item interface:
   QCPAbstractItem *item(int index) const;
@@ -1851,6 +1851,9 @@ protected:
   virtual void paintEvent(QPaintEvent *event);
   virtual void resizeEvent(QResizeEvent *event);
   virtual void mouseDoubleClickEvent(QMouseEvent *event);
+  virtual void mousePressWidgetEvent(QMouseEvent* event);
+  virtual void mouseMoveWidgetEvent(QMouseEvent* event);
+  virtual void mouseReleaseWidgetEvent(QMouseEvent *event);
   virtual void mousePressEvent(QMouseEvent *event);
   virtual void mouseMoveEvent(QMouseEvent *event);
   virtual void mouseReleaseEvent(QMouseEvent *event);
@@ -2505,7 +2508,7 @@ public:
   virtual ~QCPGraph();
   
   // getters:
-  QCPDataMap *data() const { return mData; }
+  QCPDataMap *data() { return mData; }
   LineStyle lineStyle() const { return mLineStyle; }
   QCPScatterStyle scatterStyle() const { return mScatterStyle; }
   ErrorType errorType() const { return mErrorType; }

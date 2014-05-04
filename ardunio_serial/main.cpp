@@ -9,6 +9,7 @@
 #include <fcntl.h>
 
 #define MAX_NUM_SIZE 10
+#define READ_AMOUNT 256
 
 using namespace std;
 
@@ -58,7 +59,7 @@ int main(){
 
   fd_set readfds, basefds, errfds ;
   int selectCount, bytesRead, i, v, rawBytes ;
-  char rawBuffer[4096], *s, tstr[8], buffer[1024] ;
+  char rawBuffer[4096], *s, tstr[8], buffer[READ_AMOUNT] ;
   char numBuffer[MAX_NUM_SIZE];
   unsigned int size;
   FD_ZERO( &basefds ) ;
@@ -75,7 +76,7 @@ int main(){
     }
 
     if ( selectCount > 0 && FD_ISSET( inputfd, &readfds ) ) {
-      bytesRead = read( inputfd, buffer, 1024) ;
+      bytesRead = read( inputfd, buffer, READ_AMOUNT) ;
       //printf("read:%d\n",bytesRead);
       //printf("%s\n",buffer);
 
