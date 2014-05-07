@@ -12,28 +12,37 @@
 	</h1>
 	<body>
 	 <h2 class = "sections"> Overview</h2>
-	 **Note that all the code used for the project from the test framework to the studies presented can be found in my github account for which there is a link in the homepage. The final report is organized as follows. First I present the testing harness and discuss what the benefits and failures of my setup were. Then I move on to present the power characteristics of the Tegra K1 in its idle state and the system in the typical state in which I did my studies. The report then goes on to discuss the power characteristics of stressing the cpu and gpu. The sections start with a simple study of what it looks like if the system is using 1 core, 2 cores up until 4 cores. Then I move on to present more specific results based on specific tests that I ran in hopes to discover some anomilies in the power consumption. Finally the last few sections discuss what I have learned, suggestions that I have for those researching power, and my overall take on the project. alsdjfsa
+	 **Note that all the code used for the project from the test framework to the studies presented can be found in my github account for which there is a link in the homepage. The final report is organized as follows. First I present the testing harness and discuss what the benefits and failures of my setup were. Then I move on to present the power characteristics of the Tegra K1 in its idle state and the system in the typical state in which I did my studies. The report then goes on to discuss the power characteristics of stressing the cpu and gpu. The sections start with a simple study of what it looks like if the system is using 1 core, 2 cores up until 4 cores. Then I move on to present more specific results based on specific tests that I ran in hopes to discover some anomilies in the power consumption. Finally the last few sections discuss what I have learned, suggestions that I have for those researching power, and my overall take on the project.
 
 
 	 <h2 class = "sections"> Test Framework</h2>
+	 <span><img src="s1.jpg" width="210" height="310"></span>
+	 <span><img src="s2.jpg" width="210" height="310"></span>
+	 <span><img src="s3.jpg" width="210" height="310"></span>
+	 <span><img src="s4.jpg" width="210" height="310"></span>
+	 <div class="comments"> The first step towards implementing the test harness was putting some sort of current measuring device in
+	 between the Jetson Tegra K1 power plug. In order to go about this I used the INA219 current sensor which I then plugged into and Arduino and I was able to poll the INA219 chip and use a serial cable connected to my computer to then feed in the current measurements to a QT/C++ GUI that then read and plotted the values. The INA219 sensor measured current to about a 1% percision, that is it was off by (+-) 10mA. It could also measure up to 3.2A but as expected it never had to measure such high currents.</div> <br>
 
-	 The Jetson Tegra K1 is a mobile computing development board which is an early prototype that promises to combine a Quad-core CPU setup which uses ARM Cortex-A15's with a kepler GPU which has 1 SMX and 192 cores. Both the CPU and Kepler GPU seek to deliver more computation per power than their predecessors. It is not always possible to characterize the power consumption of a system however the form factor provided by the Nvidia Jetson K1 allows just that. I seek to measure the power consumption of several parallel and multicore algorithms and compare them to their serial implementation in order to see if the benefits of parallelism are also present when adding power consumption into the equation. 
+	 <div class="pcomments"> Although I would have preferred not to have had to splice the power brick cord I went over other options
+	 	and this seemed like the best option at the time, I also contacted another person doing power measurements on the Tegra K1 to verify the accuracy of my meausurements but he has not gotten back to me yet.</div>
+	 <video width="320" height="240" controls>
+  	<source src="vd1.mp4" type="video/mp4">
+  	Your browser does not support the video tag.
+	</video>
+	<h2 class = "sections"> Site Still needing Updates Check back</h2>
 
-	 <h2 class = "sections"> The Challenge</h2>
-	 The challenge is first chronicling how to work with a new development board produced by Nvidia. In addition I'm not a hundred percent sure how I'm going to go about measuring power in an accurate fashion. In addition I might work on improving the power efficiency of certain algorithms. What I hope to learn is what sorts of workloads present a challenge for mobile platforms. Providing adequate computing power while meeting the power requirements to run on a system which restricts the power and the cooling environment that these processors exist on can be daunting challenge. 
+
+	 <h2 class = "sections"> Basic Measurements</h2>
 	 
-	 <h2 class = "sections"> Resources</h2>
-	 The resources I will be using is a Tegra K1 board provided by NVIDIA it is the version with a 32-bit ARM Cortex-A15 QuadCore setup.Also there is the Tegra K1 White Paper and the Kepler architecture paper which I will review. In addition I will look over papers describing the necessity for a system to be power efficient.
+	 <h2 class = "sections"> CPU vs GPU Stress</h2>
 
-	 <h2 class = "sections"> Goals & Deliverables</h2>
-	 PLAN TO ACHIEVE <br> <br>
-	 Evaluate the power efficiency of the Tegra K1 board for several standard benchmarks. So have graphs as well as insight based on the tests that I perform. What will dictate how well the project goes is how accurately am I able to measure the power consumption and how relevant benchmarks used are. In addition since we have quite a bit of time I might have time to actually implement a power efficient version of some popular graphics algorithm. <br> <br>
-	 HOPE TO ACHIEVE <br> <br>
+	 <h2 class = "sections"> Strange Findings</h2>
 
-	 Evaluate the power efficiency of the Tegra K1 board and also implement a power efficient algorithm using OPENGL ES. 
 
-	 <h2 class = "sections"> Platform of Choice</h2>
-	 Jetson Tegra K1 development board. I plan to be using C/C++ and OPENGL/OPENGL ES unless the board operates in a different fashion this is what I expect to be using. To really characterize power efficient we want to use as low level of a language as we can. 
+	 <h2 class = "sections"> Suggestions for future research</h2>
+	
+	<h2 class = "sections"> Conclusions</h2>
+
 	</body>
 </div>
 </html>

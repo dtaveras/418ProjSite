@@ -10,6 +10,20 @@ h1 {
     font-family: "Courier New", Courier, monospace;
 }
 
+.pcomments {
+    background-color: #CBE7F2;
+} 
+.comments {
+    background-color: #F0F0F0;
+
+}
+#mVideo
+    {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+    }
+
 #homep {
     position:absolute;
     right:1000px;
