@@ -1,5 +1,6 @@
 #include "qcustomplotwidget.h"
 #include <QDebug>
+#include <QTime>
 
 #define DATA_SAVED 5
 #define DELTA 0.02
@@ -14,6 +15,13 @@ QCustomPlotWidget::QCustomPlotWidget(){
   this->started = 0;
 }
 
+void QCustomPlotWidget::savePlot(bool state){
+  qDebug() << "savePlot";
+  int time = int(QDateTime::currentMSecsSinceEpoch());
+  QString timeString = QString::number(time);
+  QString cur_dir = QString("/Users/delvistaveras/Desktop/15418_Tegra_K1_Dev/418ProjSite/current_plot/SavedGraphs/plot");
+  this->savePng(cur_dir+timeString+".png");
+}
 
 void QCustomPlotWidget::mousePressWidgetEvent(QMouseEvent *event){
   if (event->button() == Qt::LeftButton && this->selectedGraphs().count()){
@@ -92,33 +100,37 @@ void QCustomPlotWidget::addGraphDataY(double y){
   double key = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
   static double lastPointKey = 0;
   double time_elapsed = key-lastPointKey;
-  if(time_elapsed > 0.016) // at most add point every 16 ms
+  if(time_elapsed > 0.01) // at most add point every 16 ms
     {
       if(this->started == 0){
-	lastPointKey = key;
+	cur_time = 0.0;
 	this->started = 1;
-	return;
       }
-      qDebug() << cur_time;
-      //qDebug() << time_elapsed;
+      else{
+	cur_time += time_elapsed;	
+      }
+
+      //qDebug() << cur_time;
+      //qDebug() << y;
+      qDebug() << time_elapsed;
       //qDebug() << 1.0/(key-lastPointKey);
       if(c_graph == this->graph(1))
-	c_graph->addData((cur_time-8.0)*1000.0, y);
+	c_graph->addData(cur_time-8.0, y);
       else
-	c_graph->addData(cur_time*1000.0, y);
+	c_graph->addData(cur_time, y);
 
       if(LIVE)
-	c_graph->removeDataBefore((cur_time-10)*1000.0);
+	c_graph->removeDataBefore(cur_time- DATA_SAVED);
 
       if(c_graph == this->graph(0))
 	c_graph->rescaleKeyAxis();
 
       lastPointKey = key;//save key
-      cur_time += time_elapsed;
+
     }
-  //qDebug() << c_graph->data()->count();
+  qDebug() << c_graph->data()->count();
   if(LIVE)
-    this->xAxis->setRange(cur_time, 10, Qt::AlignRight);
+    this->xAxis->setRange(cur_time, DATA_SAVED, Qt::AlignRight);
   
   this->replot(); //Update Plot
 }

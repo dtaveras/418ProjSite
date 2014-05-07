@@ -74,6 +74,7 @@ void ArduinoWorker::startListening(){
   if(inputfd < 0){
     qDebug() << "Unable to Open port Sorry!";
     closed = 1;
+    return;
   }
 
   fd_set readfds, basefds, errfds ;
@@ -100,7 +101,9 @@ void ArduinoWorker::startListening(){
       //printf("read:%d\n",bytesRead);
       //printf("%s\n",buffer);
       
-      static double endTime = 0;
+      //static double endTime = 0;
+      //double cur_time = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+
       char* char_itr = buffer;
       numBuffer[0] = '\0';
       sscanf(char_itr, "%10[^,]",numBuffer);
@@ -111,9 +114,7 @@ void ArduinoWorker::startListening(){
 	  double currentRead = atof(numBuffer)*-1.0;
 	  //qDebug() << currentRead;
 	  if(currentRead > EPSILON_CUT_OFF){
-	    double cur_time = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
-	    //qDebug() << cur_time - endTime;
-	    endTime = cur_time;
+	    //endTime = cur_time;
 	    emit addNewDataY(currentRead);//invert due to setup
 	  }
 	}
@@ -135,9 +136,7 @@ void ArduinoWorker::startListening(){
 	}*/
 
     }
-
   }
-
   return;
 }
 

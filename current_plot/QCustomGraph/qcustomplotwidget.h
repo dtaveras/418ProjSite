@@ -26,6 +26,7 @@ public slots:
   void updateGraphData(dataVector x, dataVector y);
   void addGraphData(double x, double y);
   void addGraphDataY(double y);
+  void savePlot(bool state);
 };
 
 #endif

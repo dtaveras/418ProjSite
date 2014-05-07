@@ -2,6 +2,7 @@
 #include <qpushbutton.h>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QPushButton>
 #include <QFrame>
 #include <QThread>
 #include <QObject>
@@ -43,7 +44,7 @@ int main(int argc, char** argv){
   customPlot->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
 
   customPlot->yAxis->setLabel(QString::fromUtf8("Current (mA)"));
-  customPlot->xAxis->setLabel(QString::fromUtf8("Time (ms)"));
+  customPlot->xAxis->setLabel(QString::fromUtf8("Time (S)"));
 
   customPlot->xAxis->setLabelFont(QFont("Courier", 20, QFont::Bold));
   customPlot->yAxis->setLabelFont(QFont("Courier", 20, QFont::Bold));
@@ -56,9 +57,10 @@ int main(int argc, char** argv){
   customPlot->yAxis->setAutoTickStep(false);
   customPlot->yAxis->setAutoSubTicks(false);
   customPlot->yAxis->setTickStep(100);
-  customPlot->yAxis->setSubTickCount(5);
+  customPlot->yAxis->setSubTickCount(9);
   customPlot->yAxis->setRange(0,1000);
-  
+  customPlot->xAxis->setSubTickCount(4);
+
   customPlot->setInteractions(QCP::iRangeDrag | QCP::iSelectPlottables);
 
   //customPlot->setInteractions(QCP::iSelectPlottables);
@@ -67,6 +69,26 @@ int main(int argc, char** argv){
 
   QVBoxLayout* mainLayout = new QVBoxLayout;
   mainLayout->addWidget(customPlot);
+
+  QHBoxLayout* optionsLayout = new QHBoxLayout;
+  QPushButton* saveButton = new QPushButton("Save Plot");
+  saveButton->setStyleSheet("QPushButton{background-color: #F0F0F0; border-radius: 2px;}"
+			    "QPushButton:pressed{background-color: #00F000; border-radius: 2px; border-color: navy;}");
+
+  saveButton->setMinimumWidth(80);
+  saveButton->setMaximumWidth(80);
+  saveButton->setMinimumHeight(20);
+  saveButton->setMaximumHeight(20);
+  optionsLayout->addWidget(saveButton,0,Qt::AlignLeft);
+  
+  mainLayout->addLayout(optionsLayout);
+  /*QFrame* optionsPane = new QFrame;
+  optionsPane->setStyleSheet("background-color: #00FF00;");
+  optionsPane->setMinimumWidth(WIND_WIDTH);
+  optionsPane->setMinimumHeight(WIND_HEIGHT/12);
+  optionsPane->setMaximumHeight(WIND_HEIGHT/12);
+  mainLayout->addWidget(optionsPane);*/
+  
   window->setLayout(mainLayout);
 
   QThread* listenerThread = new QThread;
@@ -78,8 +100,10 @@ int main(int argc, char** argv){
   QObject::connect(listenerThread, SIGNAL(started()), worker, SLOT(startListening()));
   QObject::connect(worker, SIGNAL(addNewDataY(double)), customPlot, 
 		   SLOT(addGraphDataY(double)));
+  QObject::connect(saveButton, SIGNAL(clicked(bool)), customPlot, SLOT(savePlot(bool)));
   QObject::connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), worker, 
 		   SLOT(receivedMouse(QMouseEvent*)));
+
   listenerThread->start();
   //window->show();
   window->showMaximized();
