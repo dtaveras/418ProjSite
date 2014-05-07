@@ -26,33 +26,53 @@
 	 <div class="pcomments"> Although I would have preferred not to have had to splice the power brick cord I went over other options
 	 	and this seemed like the best option at the time, I also contacted another person doing power measurements on the Tegra K1 to verify the accuracy of my meausurements but he has not gotten back to me yet.</div><br>
 	 <em> Sorry about the orientation it might be better to download and rotate them.</em><br>
+
 	<video id=mVideo width="320" height="240" controls>
   	<source src="vd2.mp4" type="video/mp4">
   	Your browser does not support the video tag.
 	</video>
+
 	<video id=mVideo width="320" height="240" controls>
   	<source src="vd1.mp4" type="video/mp4">
   	Your browser does not support the video tag.
 	</video>
-	 <div class="pcomments"> The Live plot samples at about 30 Samples per Second. The Tegra K1 has a keyboard and Ethernet connected. In order to do the development I connected to the board via SSH and I also used a keyboard and mouse at times. The live plot also supports saving, you can also change the mode of the plot so that it stores data for the time you run it as opposed to showing you a live view of the power being consumed.  </div><br>
 
-	<!--<video id=mVideo width="320" height="240" controls>
-  	<source src="vd2.mp4" type="video/mp4">
-  	Your browser does not support the video tag.
-	</video>-->
-	<h2 class = "sections"> Site Still needing Updates Check back</h2>
+	 <div class="pcomments"> The Live plot samples at about 30 Samples per Second. The Tegra K1 has a keyboard and Ethernet connected. In order to do the development I connected to the board via SSH and I also used a keyboard and mouse at times. The live plot also supports saving, you can also change the mode of the plot so that it stores data for the time you run it as opposed to showing you a live view of the power being consumed.</div><br>
 
-	 <h2 class = "sections"> Basic Measurements</h2>
+	<h2 class = "sections"> Basic Measurements</h2>
+	<span>
+  	<img src="plot-one_cpu.png" alt="The Pulpit Rock" width="354" height="248">
+  	
+	</span>
+
+	<span>
+  	<img src="plot-two_cpu.png" alt="The Pulpit Rock" width="354" height="248">
+	</span><br>
+	<span>One Core CPU Peak: 350mA</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 	<span>Two Core CPU Peak: 485mA</span>
+
+ 	<span>
+  	<img src="plot-three_cpu.png" alt="The Pulpit Rock" width="354" height="248">
+  	
+	</span>
+
+	<span>
+  	<img src="plot-four_cpu.png" alt="The Pulpit Rock" width="354" height="248">
+	</span><br>
+	<span>Three Core CPU Peak: 570mA</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 	<span>Three Core CPU Peak: 640mA</span>
+	<div class="comments"> **Note that the axis here are ms vs Current, there may be plots which show seconds vs power. Here are a set of plots each one targeting a certain number of cpus stressing and measure the peak current consumed by stressing the system. The tests simply launch threads and constinuously do a set of math operations. I verified that the tests consrespondingly stressed the correct number of CPUs using the gnome-system-monitor.</div><br>
+
 	 
-	 <h2 class = "sections"> CPU vs GPU Stress</h2>
+	<h2 class = "sections"> CPU vs GPU Stress</h2>
 
-	 <h2 class = "sections"> Strange Findings</h2>
+	<h2 class = "sections"> Strange Findings</h2>
 
-
-	 <h2 class = "sections"> Suggestions for future research</h2>
+	<h2 class = "sections"> Suggestions for future research</h2>
 	
 	<h2 class = "sections"> Conclusions</h2>
 
+	<h2 class = "sections"> Site Still needing Updates Please Check back</h2>
 	</body>
 </div>
 </html>
