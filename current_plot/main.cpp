@@ -43,7 +43,7 @@ int main(int argc, char** argv){
   customPlot->graph(1)->setPen(pen);
   customPlot->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
 
-  customPlot->yAxis->setLabel(QString::fromUtf8("Current (mA)"));
+  customPlot->yAxis->setLabel(QString::fromUtf8("Power (Watts)"));
   customPlot->xAxis->setLabel(QString::fromUtf8("Time (S)"));
 
   customPlot->xAxis->setLabelFont(QFont("Courier", 20, QFont::Bold));
@@ -56,9 +56,9 @@ int main(int argc, char** argv){
 
   customPlot->yAxis->setAutoTickStep(false);
   customPlot->yAxis->setAutoSubTicks(false);
-  customPlot->yAxis->setTickStep(100);
+  customPlot->yAxis->setTickStep(1);
   customPlot->yAxis->setSubTickCount(9);
-  customPlot->yAxis->setRange(0,1000);
+  customPlot->yAxis->setRange(0,12);
   customPlot->xAxis->setSubTickCount(4);
 
   customPlot->setInteractions(QCP::iRangeDrag | QCP::iSelectPlottables);

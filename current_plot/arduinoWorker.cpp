@@ -111,7 +111,7 @@ void ArduinoWorker::startListening(){
       if(size > 0) {
 	string str(numBuffer);
 	if(str.find_first_not_of("0123456789") != std::string::npos){
-	  double currentRead = atof(numBuffer)*-1.0;
+	  double currentRead = ((atof(numBuffer)*-1.0)/1000.0)*12.0;
 	  //qDebug() << currentRead;
 	  if(currentRead > EPSILON_CUT_OFF){
 	    //endTime = cur_time;
