@@ -26,7 +26,7 @@
     <span style="color:#A0A0A0; font-weight: normal">|</span>
     <span style="color:#17469C;"> Delvis Taveras </span>
     <span style="color:#A0A0A0; font-weight: normal">|</span> 
-    <a href="https://github.com/dtaveras"><span style="color:#17469C; font-weight: normal"> dtaveras@github.com </span></a>
+    <a href="https://github.com/dtaveras/418ProjSite"><span style="color:#17469C; font-weight: normal"> dtaveras@github.com </span></a>
     <span style="color:#A0A0A0; font-weight: normal">|</span>
     <span style="color:#707070; font-weight: normal"> delvistaveras@gmail.com </span>
   </h3>
@@ -44,7 +44,7 @@
     <ul>
       <li><a href = 'proposal.html'> Project Proposal </a> </li>
       <li><a href = 'checkpoint.html'> CheckPoint Report </a> </li>
-      <li><a href = '#'> Final Report </a> </li>
+      <li><a href = 'finalreport.html'> Final Report </a> </li>
       <li><a href = '#'> References </a> </li>
     <ul>
   </div>
@@ -96,11 +96,9 @@
     <td align="center">Apr 21 to 27</td>
     <td>
       <br>
-      - Evaluate what screen resolution we want to render with and what algorithms are worth testing<br>
-      - Write OpenGL and OpenGL ES test code (Rendering and shadow algorithms), try terminating Frames 
-          with and without GL_FINISH<br>
-      - Sanity check the current measurements and check that the time vs power graph is somewhat similar to
-          what is exhibited by other gpus running similar workloads<br>
+      - Go through and document the basic power consumption information of the system.<br>
+      - Found a need to collect and compare data and so we must add an option on the current plot to allow one to do this.<br>
+      - Need to add the ability to save to the testing harness.<br>
       <br>
     </td>
     </tr>
@@ -109,8 +107,9 @@
     <td>
       <br>
       - Another sanity check can we improve our tests are there any especially power hungry algorithms <br>
-      - Can we detect when the next frame has begun to be rendered?<br>
-      - Lets try to get Unreal Engine 2 running not sure if its possible since the CES demos are using android platform<br>
+      - Can we find odd relationships between power and speed does the fastest algorithm always consume the least power.<br>
+      - Test the power consumption of compute bound applications, of memory bound applications as well as combination of cpu
+      and gpu stressing algorithms.<br>
       <br>
     </td>
     </tr>
@@ -120,15 +119,17 @@
       - Update the website one last time and prepare final presentation<br>
       - What anomalies did we find?<br>
       - Were there any limits as to how accurately we could measure the power<br>
+      - Any suggestions for those wanting to measure the power consumption of algorithms correctly?<br>
       - Is the Tegra K1 a game changer?<br>
       <br>
     </td>
     </tr>
   </tbody>
 </table>
-<h3 id="mheadings"> News & Updates April 18 2014</h3>
+<h3 id="mheadings"> News & Updates May 7 2014</h3>
   <div id= "news">
-    NVIDIA Tegra K1 arrived thursday. Currently searching for a current sensor that can measure fairly small currents.
+    Nvidia Tegra K1 and current sensor and Arduino held on until the end.
+  
   </div>
 
   </body>

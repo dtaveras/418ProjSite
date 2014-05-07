@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> Project Proposal</title>
+	<title> Final Report</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="pages.css" />
 </head>
@@ -8,10 +8,15 @@
 
 	<h1>
 		<span id="homep"><a href= "index.html"> <img src="home2.png" width="50" height="50"></a></span>
-		<span >Project Proposal</span>
+		<span >Final Report: Conclusions and Data</span>
 	</h1>
 	<body>
-	 <h2 class = "sections"> Summary</h2>
+	 <h2 class = "sections"> Overview</h2>
+	 **Note that all the code used for the project from the test framework to the studies presented can be found in my github account for which there is a link in the homepage. The final report is organized as follows. First I present the testing harness and discuss what the benefits and failures of my setup were. Then I move on to present the power characteristics of the Tegra K1 in its idle state and the system in the typical state in which I did my studies. The report then goes on to discuss the power characteristics of stressing the cpu and gpu. The sections start with a simple study of what it looks like if the system is using 1 core, 2 cores up until 4 cores. Then I move on to present more specific results based on specific tests that I ran in hopes to discover some anomilies in the power consumption. Finally the last few sections discuss what I have learned, suggestions that I have for those researching power, and my overall take on the project. alsdjfsa
+
+
+	 <h2 class = "sections"> Test Framework</h2>
+
 	 The Jetson Tegra K1 is a mobile computing development board which is an early prototype that promises to combine a Quad-core CPU setup which uses ARM Cortex-A15's with a kepler GPU which has 1 SMX and 192 cores. Both the CPU and Kepler GPU seek to deliver more computation per power than their predecessors. It is not always possible to characterize the power consumption of a system however the form factor provided by the Nvidia Jetson K1 allows just that. I seek to measure the power consumption of several parallel and multicore algorithms and compare them to their serial implementation in order to see if the benefits of parallelism are also present when adding power consumption into the equation. 
 
 	 <h2 class = "sections"> The Challenge</h2>
