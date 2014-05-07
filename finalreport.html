@@ -40,7 +40,12 @@
 	 <div class="pcomments"> The Live plot samples at about 30 Samples per Second. The Tegra K1 has a keyboard and Ethernet connected. In order to do the development I connected to the board via SSH and I also used a keyboard and mouse at times. The live plot also supports saving, you can also change the mode of the plot so that it stores data for the time you run it as opposed to showing you a live view of the power being consumed.</div><br>
 
 	<h2 class = "sections"> Basic Measurements</h2>
-	<span>
+
+  	<img src="plot-key.png" alt="The Pulpit Rock" width="354" height="248">
+	</span><br>
+	<span><bd>Normal Idle System + Keyboard and Ethernet and SSH connection: 200mA<bd></span>
+
+	<span><br>
   	<img src="plot-one_cpu.png" alt="The Pulpit Rock" width="354" height="248">
   	
 	</span>
@@ -52,6 +57,7 @@
  	<span>Two Core CPU Peak: 485mA</span>
 
  	<span>
+
   	<img src="plot-three_cpu.png" alt="The Pulpit Rock" width="354" height="248">
   	
 	</span>
@@ -65,6 +71,18 @@
 
 	 
 	<h2 class = "sections"> CPU vs GPU Stress</h2>
+	<span>
+
+  	<img src="plot-cuda-serial.png" alt="The Pulpit Rock" width="354" height="248">
+  	
+	</span>
+
+	<span>
+  	<img src="plot-cuda-neon.png" alt="The Pulpit Rock" width="354" height="248">
+	</span><br>
+	<span>Green: Cuda vs Blue:Serial</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 	<span>Green: Cuda vs Blue:Neon</span>
+ 	<div class="comments"> **Note the two plots here were generated using the Non-Live part of my plot its able to taking data into multiple streams and allow the user to move the graphs to better compare algorithms. This study here was done by implementing Saxpy using arm_neon vector instructions 32bit float 4 wide SIMD, GPU Saxpy using 128 Threads per block, number of blocks depended on the array size, and finally a simple serial version</div><br>
 
 	<h2 class = "sections"> Strange Findings</h2>
 
