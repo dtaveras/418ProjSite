@@ -17,12 +17,17 @@ h1 {
     background-color: #F0F0F0;
 
 }
-/*#mVideo
+
+.warning{
+    background-color: #F5BFC8;
+
+}
+
+#mVideo
     {
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-    }*/
+        float: left;
+        padding-right: 150px;
+    }
 
 #homep {
     position:absolute;

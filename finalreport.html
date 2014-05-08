@@ -3,6 +3,17 @@
 	<title> Final Report</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="pages.css" />
+
+  <!-- Chang URLs to wherever Video.js files will be hosted -->
+  <link href="video-js.css" rel="stylesheet" type="text/css">
+  <!-- video.js must be in the <head> for older IEs to work. -->
+  <script src="video.js"></script>
+
+  <!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
+  <script>
+    videojs.options.flash.swf = "video-js.swf";
+  </script>
+
 </head>
 <div class="container">
 
@@ -12,7 +23,7 @@
 	</h1>
 	<body>
 	 <h2 class = "sections"> Overview</h2>
-	 **Note that all the code used for the project from the test framework to the studies presented can be found in my github account for which there is a link in the homepage. The final report is organized as follows. First I present the testing harness and discuss what the benefits and failures of my setup were. Then I move on to present the power characteristics of the Tegra K1 in its idle state and the system in the typical state in which I did my studies. The report then goes on to discuss the power characteristics of stressing the cpu and gpu. The sections start with a simple study of what it looks like if the system is using 1 core, 2 cores up until 4 cores. Then I move on to present more specific results based on specific tests that I ran in hopes to discover some anomilies in the power consumption. Finally the last few sections discuss what I have learned, suggestions that I have for those researching power, and my overall take on the project.
+	 **Note that all the code used for the project from the test framework to the studies presented can be found in my github account for which there is a link in the homepage. The final report is organized as follows. First I present the testing harness and discuss what the benefits and failures of my setup were. Then I move on to present the power characteristics of the Tegra K1 in its idle state and the system in the typical state in which I did my studies. The report then goes on to discuss the power characteristics of stressing the cpu and gpu. The sections start with a simple study of what it looks like if the system is using 1 core, 2 cores up until 4 cores. Then I move on to present more specific results based on specific tests that I ran in hopes to discover some anomilies in the power consumption. Finally the last few sections discusses what I have learned, suggestions that I have for those wanting to continue researching power, and my overall take on the project.
 
 
 	 <h2 class = "sections"> Test Framework</h2>
@@ -21,23 +32,27 @@
 	 <span><img src="s3.jpg" width="210" height="310"></span>
 	 <span><img src="s4.jpg" width="210" height="310"></span>
 	 <div class="comments"> The first step towards implementing the test harness was putting some sort of current measuring device in
-	 between the Jetson Tegra K1 power plug. In order to go about this I used the INA219 current sensor which I then plugged into and Arduino and I was able to poll the INA219 chip and use a serial cable connected to my computer to then feed in the current measurements to a QT/C++ GUI that then read and plotted the values. The INA219 sensor measured current to about a 1% percision, that is it was off by (+-) 10mA. It could also measure up to 3.2A but as expected it never had to measure such high currents.</div> <br>
+	 between the Jetson Tegra K1 power plug. In order to go about this I used the INA219 current sensor which I then plugged into and Arduino and I was able to poll the INA219 chip and use a serial cable connected to my computer to then feed in the current measurements to a QT/C++ GUI that then read and plotted the values. The INA219 sensor measured current to about a 1% percision, that is it was off by (+-) 10mA. It could also measure up to 3.2A but as expected it never had to measure such high currents. In addition I mainly did my measurements in current I just found that easier to think in terms of, but any conversions done below from current to power are done by multiplying the current by 12.27V output of the Power brick as measured by a multimeter. Also if it concerns anyone the board is not actually on the table there are screws on all four sides holding the board in the air.</div> <br>
 
 	 <div class="pcomments"> Although I would have preferred not to have had to splice the power brick cord I went over other options
-	 	and this seemed like the best option at the time, I also contacted another person doing power measurements on the Tegra K1 to verify the accuracy of my meausurements but he has not gotten back to me yet.</div><br>
-	 <em> Sorry about the orientation it might be better to download and rotate them.</em><br>
+	 	and this seemed like the best option at the time, I also contacted another person <a href="http://www.phoronix.com/scan.php?page=article&item=steamos_linux_benchmarks&num=1">Michael Larabel</a> who is also doing power measurements on the Tegra K1 to verify the accuracy of my meausurements but he has not gotten back to me yet. I'm interested in comparing results because he is using a WattsUp USB power meter to do the measurements hence it would be interesting to see if there is a difference in accuracy in either of our approaches.</div><br>
 
-	<video id=mVideo width="320" height="240" controls>
-  	<source src="vd2.mp4" type="video/mp4">
-  	Your browser does not support the video tag.
-	</video>
+	 <div id="mVideo"><video width="300" height="400" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" controls data-setup="{}"
+  	poster="img1.png">
+  	<source src="vd2_r2.mp4" type='video/mp4'>
 
-	<video id=mVideo width="320" height="240" controls>
-  	<source src="vd1.mp4" type="video/mp4">
-  	Your browser does not support the video tag.
-	</video>
+  	</video></div>
+	 <div id="mVideo"><video width="300" height="400" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" controls data-setup="{}"
+  		poster="img2.png">
+  	<source src="plot_no_live.mp4" type='video/mp4'>
+  	</video></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  	<span>CUDA Sample SDK smokeParticles(Live Plot) </span>&nbsp;&nbsp;&nbsp;<span>Example of using Data Comparison Option</span><br><br>
+	 <div class="pcomments"> The Live plot samples at about 30 Samples per Second. The Tegra K1 has a keyboard and Ethernet connected. In order to do the development I connected to the board via SSH and I also used a keyboard and mouse at times. The live plot also supports saving, you can also change the mode of the plot so that it stores data for the time you run it as opposed to showing you a live view of the power being consumed. Examples of what I have discussed are shown above.</div><br>
+	 <figure>
+  	<img src="my_screen.png" alt="The Pulpit Rock" width="800" height="500">
+  	<figcaption>Screen Shot of the Software part of the Testing harness</figcaption>
+	</figure>
 
-	 <div class="pcomments"> The Live plot samples at about 30 Samples per Second. The Tegra K1 has a keyboard and Ethernet connected. In order to do the development I connected to the board via SSH and I also used a keyboard and mouse at times. The live plot also supports saving, you can also change the mode of the plot so that it stores data for the time you run it as opposed to showing you a live view of the power being consumed.</div><br>
 
 	<h2 class = "sections"> Basic Measurements</h2>
 
@@ -66,11 +81,11 @@
   	<img src="plot-four_cpu.png" alt="The Pulpit Rock" width="354" height="248">
 	</span><br>
 	<span>Three Core CPU Peak: 570mA</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 	<span>Three Core CPU Peak: 640mA</span>
+ 	<span>Four Core CPU Peak: 640mA</span>
 	<div class="comments"> **Note that the axis here are ms vs Current, there may be plots which show seconds vs power. Here are a set of plots each one targeting a certain number of cpus stressing and measure the peak current consumed by stressing the system. The tests simply launch threads and constinuously do a set of math operations. I verified that the tests consrespondingly stressed the correct number of CPUs using the gnome-system-monitor.</div><br>
 
 	 
-	<h2 class = "sections"> CPU vs GPU Stress</h2>
+	<h2 class = "sections"> CPU/GPU Saxpy Study</h2>
 	<span>
 
   	<img src="plot-cuda-serial.png" alt="The Pulpit Rock" width="354" height="248">
@@ -80,17 +95,29 @@
 	<span>
   	<img src="plot-cuda-neon.png" alt="The Pulpit Rock" width="354" height="248">
 	</span><br>
+
 	<span>Green: Cuda vs Blue:Serial</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 	<span>Green: Cuda vs Blue:Neon</span>
- 	<div class="comments"> **Note the two plots here were generated using the Non-Live part of my plot its able to taking data into multiple streams and allow the user to move the graphs to better compare algorithms. This study here was done by implementing Saxpy using arm_neon vector instructions 32bit float 4 wide SIMD, GPU Saxpy using 128 Threads per block, number of blocks depended on the array size, and finally a simple serial version</div><br>
+ 	<span>Green: Cuda vs Blue:Neon</span><br>
+ 	<img src="plot-saxpy.png" alt="The Pulpit Rock" width="354" height="248"><br>
+ 	Cuda, Serial, Neon: the graph matches the ordered mentioned<br><br>
 
-	<h2 class = "sections"> Strange Findings</h2>
+ 	<div class="comments"> **Note the first two plots here were generated using the Non-Live part of my plot its able to take in data into multiple streams and allow the user to move the graphs to better compare algorithms. This study here was done by implementing Saxpy using arm_neon vector instructions 32bit float 4 wide SIMD, GPU Saxpy using 128 Threads per block number of blocks depended on the array size, and finally a simple serial version</div><br>
+ 	<div class="pcomments"> From the graph above we can see the that GPU version actually consumes the most power, followed by 
+ 		the neon version and the serial version consumes the least power. The tests have three parts first we generate the X and Y array, for the GPU and vector program we need to load the data onto the corresponding data structures inorder for the system to operate on the them. For the Neon instructions that was the vector units and for the GPU code that was the device memory. After the computation the results are copied back to system memory. The only difference in the code is target execution environment.</div><br>
+ 	<div class="warning">The kernel execution time of the GPU is much faster than both the serial and vectored version however due to having to copy data to and from the device we see a higher power draw. Although we see that the serial version consumes a bit less power than the vectored version I not able to make a definite conclusion on what is happening because the timing sometimes indicates that the vectored version is faster and other times it indicates the serial version is faster. Throughout my entire study I have not been able to get reliable CPU timing, I'm using the trusty CycleTimer that we used all throughout class. I don't know if has to do with the fact that I sometimes receive warnings of clock skew but measuring CPU time accurately has definitely been a deterent to drawing accurate conclusions. There is an example of what I'm referring to below.</div><br><br>
 
-	<h2 class = "sections"> Suggestions for future research</h2>
+ 	 <img src="vect_timing.png" width="400" height="230"><br>
+
+
+	<h2 class = "sections"> Interesting Findings</h2>
+	**Note these interesting findings are not all directly related to the studies above. When I first recieved the board I wanted to lower the power consumption to as low I could get it so I installed powertop which helps you save energy by turning off certain uneeded functionally. I found that indeed powertop did work and decreased the energy being consumed. Also cpufreq-info & cpufreq-set allow you to monitor all cores and also allow you to control the min and max frequency of the cores which could provide for some interesing tests. 
+
+	<h2 class = "sections"> Future Research</h2>
+	I think that some future research would involve implementing graphics algorithms and actually comparing the performance and power effeciency of the Kepler GPU with other systems. I think that emperical studies are necessary and elighting even if others have proven that one system is faster or is more power effecient than another system. It is difficult to come up with tests that really provide insightful data, there so many benchmarks and tests out there but careful thought must be given to what sort of conclusions one can draw from them. Tackling the problem of devising insightful tests that measure the power and energy effeciency of different systems and different approaches to using multiple execution units concurrently or in parallel would be interesting. Finally especially for analyzing the Tegra K1 it would have been nice to really go over some typical Mobile computing algorithms. 
 	
-	<h2 class = "sections"> Conclusions</h2>
-
-	<h2 class = "sections"> Site Still needing Updates Please Check back</h2>
+	<h2 class = "sections"> Conclusions and thoughts on the study</h2>
+	This study has been really interesting because it has let me explore and view computers from a different perspective and it really shows that it truely is a challenge to take the same computing power of a typical laptop computer and fit it into a phone form factor. 
+	
 	</body>
 </div>
 </html>
