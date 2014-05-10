@@ -111,6 +111,12 @@
 
  	 <img src="vect_timing.png" width="400" height="230"><br>
 
+ 	<h2 class = "sections"> CPU Mandelbrot Study</h2>
+  	<img src="plot-mandel.png" alt="The Pulpit Rock" width="354" height="248"><br>
+  	<span>BLUE: Serial Mandelbrot, GREEN: Multithreaded Mandelbrot 8 threads</span>
+  	<div class="pcomments"> Here we have the conical example of a parallel program vs a sequential one, we can see that for the multithreaded program the duration is shorter and but the power being used is higher. Now of course this finding is interesting as it is however the more interesting and important part would have been to measure the energy consumed however due to the inexactness of the sampling I thought it would not have been accurate. Looking back at it however it makes sense to do a measurement regardless because while it may not be accurate it does work for comparison purposes since both tests are under the same axis.
+  	</div><br>
+
 
 	<h2 class = "sections"> Interesting Findings</h2>
 	**Note these interesting findings are not all directly related to the studies above. When I first recieved the board I wanted to lower the power consumption to as low I could get it so I installed powertop which helps you save energy by turning off certain uneeded functionally. I found that indeed powertop did work and decreased the energy being consumed. Also cpufreq-info & cpufreq-set allow you to monitor all cores and also allow you to control the min and max frequency of the cores which could provide for some interesing tests. 
@@ -119,8 +125,8 @@
 	I think that some future research would involve implementing graphics algorithms and actually comparing the performance and power effeciency of the Kepler GPU with other systems. I think that emperical studies are necessary and elighting even if others have proven that one system is faster or is more power effecient than another system. It is difficult to come up with tests that really provide insightful data, there so many benchmarks and tests out there but careful thought must be given to what sort of conclusions one can draw from them. Tackling the problem of devising insightful tests that measure the power and energy effeciency of different systems and different approaches to using multiple execution units concurrently or in parallel would be interesting. Finally especially for analyzing the Tegra K1 it would have been nice to really go over some typical Mobile computing algorithms. 
 	
 	<h2 class = "sections"> Conclusions and thoughts on the study</h2>
-	This study has been really interesting because it has let me explore and view computers from a different perspective and it really shows that it truely is a challenge to take the same computing power of a typical laptop computer and fit it into a phone form factor. 
-	
+	This study has been really interesting because it has let me explore and view computers from a different perspective and it really shows that it truely is a challenge to take the same computing power of a typical laptop computer and fit it into a phone form factor. Focusing on power is definitely not enough if you want to really compare algorithms, energy should be the focus because while power is instructive when considering whether the device to be clocked down when comparing algorithms energy is a bit more useful.
+
 	</body>
 </div>
 </html>
